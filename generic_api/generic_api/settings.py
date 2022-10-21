@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     ##### ______ DEV APPLICATIONS _____ ####
     'api_app_1',
+    'rest_framework',
 
 ]
 
@@ -77,12 +78,32 @@ WSGI_APPLICATION = 'generic_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+#### ________ SETTING UP POSTGRESQL DATABASE ________####
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+       'ENGINE': 'django.db.backends.postgresql',
+       'NAME': 'dbgeneric',
+       'USER': 'postgres',
+       'PASSWORD': 'postgres',
+       'HOST': 'localhost',
+       'PORT': '5432',
+   }
 }
+
+
+
+
+
 
 
 # Password validation
@@ -125,3 +146,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# REST_FRAMEWORK = {
+#     # Use Django's standard `django.contrib.auth` permissions,
+#     # or allow read-only access for unauthenticated users.
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+#     ]
+# }
