@@ -1,0 +1,1 @@
+# generic_view_api_django
