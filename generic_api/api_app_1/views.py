@@ -16,12 +16,6 @@ class StudentGeneric(generics.ListCreateAPIView):
         serializer.is_valid(raise_exception=True)
         return Response(data={"message": "Student Created successfully."})
        
-    # def list(self, request):
-    #     # Note the use of `get_queryset()` instead of `self.queryset`
-    #     queryset = self.get_queryset()
-    #     serializer = StudentSerializer(queryset, many=True)
-    #     return Response(serializer.data)
-
 # ####________DELETE STUDENT AND UPDATE STUDENTS________####
 class DeleteStudentGeneric(generics.RetrieveUpdateDestroyAPIView):
     queryset          = Students.objects.all()
