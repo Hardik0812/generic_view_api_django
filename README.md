@@ -49,10 +49,10 @@ Available mixins:
 |Mixin	                |           Usage         |
 |-----------------------|-------------------------|
 |CreateModelMixin|	      Create a model instance|
-ListModelMixin	          List a queryset
-RetrieveModelMixin	      Retrieve a model instance
-UpdateModelMixin	      Update a model instance
-DestroyModelMixin	      Delete a model instance
+|ListModelMixin	|          List a queryset|
+|RetrieveModelMixin|	      Retrieve a model instance|
+|UpdateModelMixin|	      Update a model instance|
+|DestroyModelMixin	|      Delete a model instance|
 
 You can use only one of them or combine them to achieve the desired result.
 
