@@ -23,7 +23,7 @@ GenericAPIView is a base class for all other generic views. It provides methods 
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 
-class RetrieveDeleteItem(GenericAPIView):
+``` class RetrieveDeleteItem(GenericAPIView):
 
     serializer_class = ItemSerializer
     queryset = Item.objects.all()
@@ -37,21 +37,27 @@ class RetrieveDeleteItem(GenericAPIView):
         instance = self.get_object()
         instance.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+```
 When extending GenericAPIView, queryset and serializer_class must be set. Alternatively, you can overwrite get_queryset()/get_serializer_class().
-
 Since there are several mixins meant to be used with GenericAPIView, I don't recommend reinventing the wheel by using it on its own.
 
-Mixins
+# Mixins
 Mixins provide bits of common behavior. They cannot be used standalone; they must be paired with GenericAPIView to make a functional view. While the mixin classes provide create/retrieve/update/delete actions, you still need to bind the appropriate actions to the methods.
 
 Available mixins:
 
-Mixin	Usage
+|Mixin	                |           Usage         |
+|-----------------------|-----------------        |
 CreateModelMixin	Create a model instance
-ListModelMixin	List a queryset
+|-----------------------|-----------------        |
+ListModelMixin	    List a queryset
+|-----------------------|-----------------        |
 RetrieveModelMixin	Retrieve a model instance
+|-----------------------|-----------------        |
 UpdateModelMixin	Update a model instance
+|-----------------------|-----------------        |
 DestroyModelMixin	Delete a model instance
+|-----------------------|-----------------        |
 You can use only one of them or combine them to achieve the desired result.
 
 Here's an example of what a mixin looks like:
