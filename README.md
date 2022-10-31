@@ -58,6 +58,7 @@ You can use only one of them or combine them to achieve the desired result.
 
 Here's an example of what a mixin looks like:
 
+```
 class RetrieveModelMixin:
     """
     Retrieve a model instance.
@@ -66,6 +67,7 @@ class RetrieveModelMixin:
         instance = self.get_object()
         serializer = self.get_serializer(instance)
         return Response(serializer.data)
+```
 As you can see, RetrieveModelMixin provides a function (an action) called retrieve that retrieves an object from the database and returns it in its serialized form.
 
 ListModelMixin and CreateModelMixin
@@ -74,7 +76,7 @@ ListModelMixin implements an action that returns a (optionally paginated) serial
 CreateModelMixin implements an action that creates and saves a new model instance.
 
 Often, they are used together to create a list-create API endpoint:
-
+```
 from rest_framework import mixins
 from rest_framework.generics import GenericAPIView
 
@@ -88,6 +90,7 @@ class CreateListItems(mixins.ListModelMixin, mixins.CreateModelMixin, GenericAPI
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+```
 In CreateListItems we used the serializer_class and queryset provided by GenericAPIView.
 
 We defined get and post methods on our own, which used list and create actions provided by the mixins:
@@ -100,7 +103,7 @@ You're responsible for binding actions to the methods.
 Theoretically, that means that you could bind POST methods with list actions and GET methods with create actions, and things would "kind" of work.
 
 For example:
-
+```
 from rest_framework import mixins
 from rest_framework.generics import GenericAPIView
 
@@ -114,6 +117,7 @@ class CreateList(mixins.ListModelMixin, mixins.CreateModelMixin, GenericAPIView)
 
     def post(self, request, *args, **kwargs):
        return self.list(request, *args, **kwargs)
+```
 This will produce the following results...
 
 Using GET method:
