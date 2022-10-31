@@ -26,7 +26,11 @@ class DeleteStudentGeneric(generics.RetrieveUpdateDestroyAPIView):
         item.delete()
         return Response(data={"message": "Student Deleted successfully."})
 
-
+    def update(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(data={"message": "Student Updated successfully."})
 
 
 
