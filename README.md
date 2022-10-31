@@ -1,19 +1,14 @@
 # generic_view_api_django
-######Objectives:-
+###### Objectives:-
 By the end of this article, you should be able to explain:
 
-What GenericAPIView is, what mixins are, and how they both come together to create concrete views
-Which mixins you use and what they can do
-How to create a custom mixin and how to use it
-Which generic views you can use and what they do
-Generic Views
-Generic views are a set of commonly used patterns.
+> What GenericAPIView is, what mixins are, and how they both come together to create concrete views
+> Which mixins you use and what they can do
+> How to create a custom mixin and how to use it
+> Which generic views you can use and what they do
+> Generic Views
 
-They're built on top of the APIView class, which we presented in the previous article of this series.
-
-Their purpose is for you to quickly build API views that map closely to your database models without repeating yourself.
-
-They consist of GenericAPIView, mixins, and concrete views:
+###### Generic views are a set of commonly used patterns.They're built on top of the APIView class, which we presented in the previous article of this series.Their purpose is for you to quickly build API views that map closely to your database models without repeating yourself.They consist of GenericAPIView, mixins, and concrete views:
 
 GenericAPIView is a more loaded version of APIView. It isn't really useful on its own but can be used to create reusable actions.
 Mixins are bits of common behavior. They're useless without GenericAPIView.
@@ -22,7 +17,7 @@ DRF uses different names for concrete views. In the documentation and in code co
 
 Since the names are so similar, it's easy to confuse them. Generic views is a word that represents both mixins and concrete views. When using generic views, concrete views is probably the level you'll be working with.
 
-GenericAPIView
+# GenericAPIView
 GenericAPIView is a base class for all other generic views. It provides methods like get_object/get_queryset and get_serializer. Although it's designed to be combined with mixins (as it's used within generic views), it's possible to use it on its own:
 
 from rest_framework.generics import GenericAPIView
