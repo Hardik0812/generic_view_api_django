@@ -267,6 +267,7 @@ Unless you need highly customized behavior, this is the view to go with if you'r
 There are nine classes, each providing a combination of behavior that you might need:
 
 |Class|	Usage|	Method handler	|Extends mixin|
+|------|-----|-------------------|------------------|
 |CreateAPIView|	create-only|	post|	CreateModelMixin|
 |ListAPIView	|read-only for multiple instances|	get|	ListModelMixin|
 |RetrieveAPIView|	read-only for single instance|	get	|RetrieveModelMixin|
