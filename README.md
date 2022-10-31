@@ -221,7 +221,7 @@ Here, we overrode the get_serializer_class method from GenericAPIView class.
 Maybe you want to override other methods, like get_queryset or get_object? Take a look at the code inside the GenericAPIView class, where the DRF creators specify which methods you may want to override.
 
 Now you just need to add SerializerByMethodMixin to your view and set the serializer_map attribute:
-
+```
 class ListCreateItems(SerializerByMethodMixin, ListCreateAPIView):
 
     queryset = Item.objects.all()
@@ -229,20 +229,25 @@ class ListCreateItems(SerializerByMethodMixin, ListCreateAPIView):
         'GET': GetItemSerializer,
         'POST': PostItemSerializer,
     }
-Make sure you include the mixin as the first parameter, so its methods are not overridden (higher priority first).
 
-Custom Base Class
+```
+> Make sure you include the mixin as the first parameter, so its methods are not overridden (higher priority first).
+
+# Custom Base Class
+
 If you're using the mixin for the same type of view multiple times, you can even create a custom base class.
 
 For example:
-
+```
 class BaseCreateListView((MixinSingleOrListSerializer, ListCreateAPIView)):
     pass
-Concrete Views
+```
+# Concrete Views
+
 Concrete views do most of the work that we need to do on our own when using APIView. They use mixins as their basic building blocks, combine the building blocks with GenericAPIView, and bind actions to the methods.
 
 Take a quick look at the code for one of the concrete view classes, ListCreateAPIView:
-
+```
 # https://github.com/encode/django-rest-framework/blob/3.12.4/rest_framework/generics.py#L232
 
 class ListCreateAPIView(mixins.ListModelMixin,
@@ -254,22 +259,23 @@ class ListCreateAPIView(mixins.ListModelMixin,
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+```
 As you can see, it's fairly simple and looks very similar to what we created on our own when using mixins. They extend the appropriate mixins and GenericAPIView. They also define each of the relevant methods and bind the appropriate actions to them.
 
 Unless you need highly customized behavior, this is the view to go with if you're using generic views.
 
 There are nine classes, each providing a combination of behavior that you might need:
 
-Class	Usage	Method handler	Extends mixin
-CreateAPIView	create-only	post	CreateModelMixin
-ListAPIView	read-only for multiple instances	get	ListModelMixin
-RetrieveAPIView	read-only for single instance	get	RetrieveModelMixin
-DestroyAPIView	delete-only for single instance	delete	DestroyModelMixin
-UpdateAPIView	update-only for single instance	put, patch	UpdateModelMixin
-ListCreateAPIView	read-write for multiple instances	get, post	CreateModelMixin, ListModelMixin
-RetrieveUpdateAPIView	read-update for single instance	get, put, patch	RetrieveModelMixin, UpdateModelMixin
-RetrieveDestroyAPIView	read-delete for single instance	get, delete	RetrieveModelMixin, DestroyModelMixin
-RetrieveUpdateDestroyAPIView	read-update-delete for single instance	get, put, patch, delete	RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin
+|Class|	Usage|	Method handler	|Extends mixin|
+|CreateAPIView|	create-only|	post|	CreateModelMixin|
+|ListAPIView	|read-only for multiple instances|	get|	ListModelMixin|
+|RetrieveAPIView|	read-only for single instance|	get	|RetrieveModelMixin|
+|DestroyAPIView	|delete-only for single instance|	delete|	DestroyModelMixin|
+|UpdateAPIView	|update-only for single instance|	put, patch	|UpdateModelMixin|
+|ListCreateAPIView|	read-write for multiple instances|	get, post	|CreateModelMixin, ListModelMixin|
+|RetrieveUpdateAPIView|	read-update for single instance|	get, put, patch	|RetrieveModelMixin, UpdateModelMixin|
+|RetrieveDestroyAPIView|	read-delete for single instance	|get, delete	|RetrieveModelMixin, DestroyModelMixin|
+|RetrieveUpdateDestroyAPIView|	read-update-delete for single instance|	get, put, patch, delete	|RetrieveModelMixin, UpdateModelMixin, DestroyModelMixin|
 Here's another helpful table that shows which class a particular method handler is mapped back to:
 
 Class	get	post	put/patch	delete
