@@ -1,5 +1,5 @@
 # generic_view_api_django
-Objectives
+######Objectives:-
 By the end of this article, you should be able to explain:
 
 What GenericAPIView is, what mixins are, and how they both come together to create concrete views
