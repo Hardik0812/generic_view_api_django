@@ -2,13 +2,13 @@
 ###### Objectives:-
 By the end of this article, you should be able to explain:
 
-> What GenericAPIView is, what mixins are, and how they both come together to create concrete views
-> Which mixins you use and what they can do
-> How to create a custom mixin and how to use it
-> Which generic views you can use and what they do
-> Generic Views
+1. What GenericAPIView is, what mixins are, and how they both come together to create concrete views.
+2. Which mixins you use and what they can do.
+3. How to create a custom mixin and how to use it.
+4. Which generic views you can use and what they do.
+5. Generic Views.
 
-###### Generic views are a set of commonly used patterns.They're built on top of the APIView class, which we presented in the previous article of this series.Their purpose is for you to quickly build API views that map closely to your database models without repeating yourself.They consist of GenericAPIView, mixins, and concrete views:
+ Generic views are a set of commonly used patterns.They're built on top of the APIView class, which we presented in the previous article of this series.Their purpose is for you to quickly build API views that map closely to your database models without repeating yourself.They consist of GenericAPIView, mixins, and concrete views:
 
 GenericAPIView is a more loaded version of APIView. It isn't really useful on its own but can be used to create reusable actions.
 Mixins are bits of common behavior. They're useless without GenericAPIView.
