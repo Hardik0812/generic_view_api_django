@@ -48,7 +48,7 @@ Available mixins:
 
 |Mixin	                |           Usage         |
 |-----------------------|-------------------------|
-CreateModelMixin	      Create a model instance
+|CreateModelMixin|	      Create a model instance|
 ListModelMixin	          List a queryset
 RetrieveModelMixin	      Retrieve a model instance
 UpdateModelMixin	      Update a model instance
