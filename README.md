@@ -47,17 +47,13 @@ Mixins provide bits of common behavior. They cannot be used standalone; they mus
 Available mixins:
 
 |Mixin	                |           Usage         |
-|-----------------------|-----------------        |
-CreateModelMixin	Create a model instance
-|-----------------------|-----------------        |
-ListModelMixin	    List a queryset
-|-----------------------|-----------------        |
-RetrieveModelMixin	Retrieve a model instance
-|-----------------------|-----------------        |
-UpdateModelMixin	Update a model instance
-|-----------------------|-----------------        |
-DestroyModelMixin	Delete a model instance
-|-----------------------|-----------------        |
+|-----------------------|-------------------------|
+CreateModelMixin	      Create a model instance
+ListModelMixin	          List a queryset
+RetrieveModelMixin	      Retrieve a model instance
+UpdateModelMixin	      Update a model instance
+DestroyModelMixin	      Delete a model instance
+
 You can use only one of them or combine them to achieve the desired result.
 
 Here's an example of what a mixin looks like:
