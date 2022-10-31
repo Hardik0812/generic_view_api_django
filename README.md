@@ -70,7 +70,7 @@ class RetrieveModelMixin:
 ```
 As you can see, RetrieveModelMixin provides a function (an action) called retrieve that retrieves an object from the database and returns it in its serialized form.
 
-ListModelMixin and CreateModelMixin
+##### ListModelMixin and CreateModelMixin
 ListModelMixin implements an action that returns a (optionally paginated) serialized representation of the queryset.
 
 CreateModelMixin implements an action that creates and saves a new model instance.
@@ -95,10 +95,10 @@ In CreateListItems we used the serializer_class and queryset provided by Generic
 
 We defined get and post methods on our own, which used list and create actions provided by the mixins:
 
-CreateModelMixin provides a create action
-ListModelMixin provides a list action
+1. CreateModelMixin provides a create action
+2. ListModelMixin provides a list action
+
 Binding Actions to Methods
-You're responsible for binding actions to the methods.
 
 Theoretically, that means that you could bind POST methods with list actions and GET methods with create actions, and things would "kind" of work.
 
@@ -118,19 +118,9 @@ class CreateList(mixins.ListModelMixin, mixins.CreateModelMixin, GenericAPIView)
     def post(self, request, *args, **kwargs):
        return self.list(request, *args, **kwargs)
 ```
-This will produce the following results...
 
-Using GET method:
 
-DRF Browsable API
-
-Using POST method:
-
-DRF Browsable API
-
-DISCLAIMER: Just because this is possible doesn't mean I advise you to do it. The sole purpose of this was to show you how binding methods and actions work.
-
-RetrieveModelMixin, UpdateModelMixin and DestroyModelMixin
+##### RetrieveModelMixin, UpdateModelMixin and DestroyModelMixin
 RetrieveModelMixin, UpdateModelMixin and DestroyModelMixin all deal with a single model instance.
 
 RetrieveModelMixin and UpdateModelMixin both return serialized representations of the object, while DestroyModelMixin, in the case of a success, returns HTTP_204_NO_CONTENT.
@@ -139,6 +129,7 @@ You can use one of them or combine them as you see fit.
 
 In this example, we combined all three into a single endpoint for every action that's possible for a detailed view:
 
+```
 from rest_framework import mixins
 from rest_framework.generics import GenericAPIView
 
@@ -163,15 +154,17 @@ class RetrieveUpdateDeleteItem(
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
+```
 Actions provided:
 
-RetrieveModelMixin provides a retrieve action
-UpdateModelMixin provides update and partial_update actions
-DestroyModelMixin provides a destroy action
+1. RetrieveModelMixin provides a retrieve action
+2. UpdateModelMixin provides update and partial_update actions
+3. DestroyModelMixin provides a destroy action
+
 So, with the RetrieveUpdateDeleteItem endpoint, a user can retrieve, update, or delete a single item.
 
 You can also limit the view to specific actions:
-
+```
 from rest_framework import mixins
 from rest_framework.generics import GenericAPIView
 
@@ -185,13 +178,15 @@ class RetrieveUpdateItem(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, Gen
 
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
+
+```
 In this example, we omitted the DestroyModelMixin and used only the update action from UpdateModelMixin.
 
-Grouping Mixins
+##### Grouping Mixins
 It's a good idea to have a single view for handling all instances -- listing all instances and adding a new instance -- and another view for handling a single instance -- retrieving, updating, and deleting single instances.
 
 That said, you can combine mixins how you see fit. For example, you could combine the RetrieveModelMixin and CreateModelMixin mixins:
-
+```
 from rest_framework import mixins
 from rest_framework.generics import GenericAPIView
 
@@ -205,23 +200,22 @@ class RetrieveCreate(mixins.RetrieveModelMixin, mixins.CreateModelMixin, Generic
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
-This produces an endpoint for retrieving a single instance and adding new instances:
 
-DRF Browsable API
+```
 
-DISCLAIMER: Again, just because this is possible doesn't mean it's a good idea. The above example is intended for educational purposes only. I don't advise using it in production code.
 
-Custom Mixins
+# Custom Mixins
 In real-life applications, there's a good chance you'll want some custom behavior, and you'll want it in more than one place. You can create a custom mixin, so you don't need to repeat your code and include it in your view class.
 
 Let's say you want to use a different serializer depending on the request method. You could add a number of if statements to the view, but this can get confusing quickly. Besides, in two months, you'll add another model, and you'll need to do a similar thing again.
 
 In this case, it's a good idea to create a custom mixin to map serializers to the request methods:
-
+```
 class SerializerByMethodMixin:
     def get_serializer_class(self, *args, **kwargs):
 
         return self.serializer_map.get(self.request.method, self.serializer_class)
+```
 Here, we overrode the get_serializer_class method from GenericAPIView class.
 
 Maybe you want to override other methods, like get_queryset or get_object? Take a look at the code inside the GenericAPIView class, where the DRF creators specify which methods you may want to override.
