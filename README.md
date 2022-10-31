@@ -489,3 +489,4 @@ class RetrieveUpdateDeleteItem(RetrieveUpdateDestroyAPIView):
 Generic views offer a variety of pre-built solutions.
 
 If you don't have any special requirements, concrete views (i.e., RetrieveDestroyAPIView) are a great way to go. If you need something less rigorous, you can use concrete classes as building blocks -- GenericAPIView and mixins (e.g., UpdateModelMixin). This will still save some work over just using the APIView class.
+
